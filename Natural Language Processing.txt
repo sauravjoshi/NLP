@@ -1,0 +1,59 @@
+1. Text Preprocessing
+    Techniques include Lowering, Upper-Casing, Text Normalization, Stemming, Lemmatization, Tokenization, Removing StopWords
+    #remove html markup text = re.sub("(<.*?>)","",text)
+    #remove non-ascii and digits text=re.sub("(\W|\d+)"," ",text)
+
+2. Word Embeddings
+    The models perform most efficiently when provided with numerical data as input, and thus a key role of natural language processing is to transform preprocessed textual data into numerical data, which is a numerical representation of the textual data.
+    Word embeddings are the numerical representation in the form of real-value vectors for text. Words that have similar meanings map to similar vectors and thus have similar representations.
+    The main aim of word embeddings is to form clusters of similar vectors that correspond to words with similar meanings.
+
+    Word Embedding Techniques:
+        1. Word2Vec
+        It is a shallow network containing only 2 layers. The input is a text corpus and output are numerical vectors also known as feature vectors. The aim of Word2Vec is to understand the probility of 2 or more words occuring together and thus to group words with similar meanings to form a cluster in a vector space. 
+        Functioning of Word2Vec:
+        Word2Vec trains a word against words that neighbour the word in the corpus, and there are two methods of doing so
+        Continous Bag of Word:
+        This method predicts the current word based on the context. Thus, it takes the word's surrounding words as input to produce the word as output, and it chooses this word based on the probability that this is indeed the word that is a part of the sentence.
+        Skip-gram:
+        This method predicts the words surrounding a word by taking the word as input, understanding the meaning of the word, and assigning it to a context. For example, if the algorithm was given the word "delightful," it would have to understand its meaning and learn from past context to predict that the probability that the surrounding words are "the food was" is highest.
+        
+
+Udemy Course on Advanced NLP
+
+Review Section 
+Word Embedding convert string to numbers
+
+What is a word embedding? 
+Feature Vector: Each of the row is a feature vector(A vector is just a tuple of numbers)We want the feature vector to place things in a meaningful position relative to each other. Now the feature vectors that correspond to a word are called as word vectors.
+Simplest of taking feature vectors is counting them.
+In modern times we have more interseting ways of finding word vectors. Typically it is unsupervised approach and the output is list of feature vectors that don't really have any sense to humans. They make sense geometrically. They are also called latent vectors or hidden vectors. Ex: Word2Vec, GloVe, FastText
+Modern algorithms are very good at relationships between the words.
+Vec(king)-Vec(man) ~= Vec(queen)-Vec(woman)
+Word similarity is another use-case where the wordvectors for particular word are more closer to the other.
+A word embedding is simply a matrix of stacked word vectors.
+V = # of rows = vocabulary size = # of distinct words
+D = embedding dimension = feature vector size. So a word embedding is a V X D matrix. NOTE: THE FIRST LAYER OF A NEURAL NETWORK WITH ONE-HOT INPUTS IS ALWAYS AN EMBEDDING 
+Computational Trick:
+You should never multiply a one-hot vector by a matrix as we can simply get that by referring to the index of one-hot vector.
+For word embedding never use Dense
+
+Using Word Embedding
+We get the best pre-trained word embeddings that are made available and use that in form of tranfer learning. If any word isn't in the embedding we can initialize that wordvector randomly. Also there is no need of re-training the pre-trained embeddings for some few new words those are given random values cause if we do so we are training the entire matrix again.
+
+CNN are applicable to text through 1D Convolution.
+Word Embeddings are in form of V X D matrix, which undergo a 1D Convolution operation(row-wise for each word) and follows the rest procedure of CNN. 
+
+RNN
+
+A CNN is a pretty basic approach, we input X and we get output Y.
+The brain consists of billions of neurons, without any single direction. A decision made now is not based on what you see or hear now. We can think and reason based on past inputs. What happens if we add feedback loops and memory to a neural network?
+
+
+Why not Feedforward networks
+The output at time t is independent at time t-1. OPs are independent to each other. A feedforward NN cannot predict the next occuring word in a sequence.
+Input for a RNN at time t consists of input at time t and output from time t-1. Similarly for output at t+1 we have 2 inputs, one is new input and another is information coming from the previous time stamp. 
+
+LSTM GRU and BiDirectional RNN
+
+Seq2Seq
